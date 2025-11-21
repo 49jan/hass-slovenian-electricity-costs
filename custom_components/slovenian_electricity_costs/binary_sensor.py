@@ -71,7 +71,7 @@ class TariffBlockBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "byJan",
+            "manufacturer": "49Jan",
             "model": "Tariff Calculator",
             "sw_version": "1.0.0",
         }
@@ -130,7 +130,7 @@ class HigherSeasonBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "byJan",
+            "manufacturer": "49Jan",
             "model": "Tariff Calculator",
             "sw_version": "1.0.0",
         }
@@ -180,7 +180,7 @@ class HolidayBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "byJan",
+            "manufacturer": "49Jan",
             "model": "Tariff Calculator",
             "sw_version": "1.0.0",
         }
@@ -223,7 +223,7 @@ class CheapElectricityBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "byJan",
+            "manufacturer": "49Jan",
             "model": "Tariff Calculator",
             "sw_version": "1.0.0",
         }
@@ -272,7 +272,7 @@ class ExpensiveElectricityBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "byJan",
+            "manufacturer": "49Jan",
             "model": "Tariff Calculator",
             "sw_version": "1.0.0",
         }

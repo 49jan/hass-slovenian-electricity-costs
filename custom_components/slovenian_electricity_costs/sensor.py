@@ -88,7 +88,7 @@ class SlovenianElectricityCostsSensorBase(CoordinatorEntity, SensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "byJan",
+            "manufacturer": "49Jan",
             "model": "Tariff Calculator",
             "sw_version": "1.0.0",
         }
