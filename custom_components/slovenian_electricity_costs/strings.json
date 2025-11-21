@@ -44,64 +44,79 @@
   },
   "entity": {
     "sensor": {
-      "current_tariff_block": {
-        "name": "Current Tariff Block"
+      "electricity_current_tariff_block": {
+        "name": "Electricity Current Tariff Block"
       },
-      "current_electricity_price": {
-        "name": "Current Electricity Price"
+      "electricity_current_total_price": {
+        "name": "Electricity Current Total Price"
       },
-      "current_season": {
-        "name": "Current Season"
+      "electricity_current_energy_tariff": {
+        "name": "Electricity Current Energy Tariff"
       },
-      "holiday_status": {
-        "name": "Holiday Status"
+      "electricity_current_energy_price": {
+        "name": "Electricity Current Energy Price"
       },
-      "electricity_cost": {
-        "name": "Electricity Cost"
+      "electricity_current_network_price": {
+        "name": "Electricity Current Network Price"
       },
-      "block_1_price": {
-        "name": "Block 1 Price"
+      "electricity_contributions": {
+        "name": "Electricity Contributions"
       },
-      "block_2_price": {
-        "name": "Block 2 Price"
+      "electricity_excise_tax": {
+        "name": "Electricity Excise Tax"
       },
-      "block_3_price": {
-        "name": "Block 3 Price"
+      "electricity_current_season": {
+        "name": "Electricity Current Season"
       },
-      "block_4_price": {
-        "name": "Block 4 Price"
+      "electricity_current_holiday_status": {
+        "name": "Electricity Current Holiday Status"
       },
-      "block_5_price": {
-        "name": "Block 5 Price"
+      "electricity_total_cost": {
+        "name": "Electricity Total Cost"
+      },
+      "electricity_block_1_price": {
+        "name": "Electricity Block 1 Price"
+      },
+      "electricity_block_2_price": {
+        "name": "Electricity Block 2 Price"
+      },
+      "electricity_block_3_price": {
+        "name": "Electricity Block 3 Price"
+      },
+      "electricity_block_4_price": {
+        "name": "Electricity Block 4 Price"
+      },
+      "electricity_block_5_price": {
+        "name": "Electricity Block 5 Price"
       }
     },
     "binary_sensor": {
-      "tariff_block_1_active": {
-        "name": "Tariff Block 1 Active"
+      "electricity_block_1_active": {
+        "name": "Electricity Block 1 Active"
       },
-      "tariff_block_2_active": {
-        "name": "Tariff Block 2 Active"
+      "electricity_block_2_active": {
+        "name": "Electricity Block 2 Active"
       },
-      "tariff_block_3_active": {
-        "name": "Tariff Block 3 Active"
+      "electricity_block_3_active": {
+        "name": "Electricity Block 3 Active"
       },
-      "tariff_block_4_active": {
-        "name": "Tariff Block 4 Active"
+      "electricity_block_4_active": {
+        "name": "Electricity Block 4 Active"
       },
-      "tariff_block_5_active": {
-        "name": "Tariff Block 5 Active"
+      "electricity_block_5_active": {
+        "name": "Electricity Block 5 Active"
       },
-      "higher_season": {
-        "name": "Higher Season"
+      "electricity_higher_season": {
+        "name": "Electricity Higher Season"
       },
-      "holiday_today": {
-        "name": "Holiday Today"
+      "electricity_holiday_today": {
+        "name": "Electricity Holiday Today"
       },
-      "cheap_electricity": {
-        "name": "Cheap Electricity"
+      "electricity_cheap_rate": {
+        "name": "Electricity Cheap Rate"
       },
-      "expensive_electricity": {
-        "name": "Expensive Electricity"
+      "electricity_expensive_rate": {
+        "name": "Electricity Expensive Rate"
       }
     }
   }

@@ -100,8 +100,8 @@ class CurrentTariffBlockSensor(SlovenianElectricityCostsSensorBase):
     def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator, config_entry)
-        self._attr_unique_id = f"{config_entry.entry_id}_current_block"
-        self._attr_name = "Current Tariff Block"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_current_tariff_block"
+        self._attr_name = "Electricity Current Tariff Block"
         self._attr_icon = "mdi:clock-time-four"
 
     @property
@@ -135,8 +135,8 @@ class CurrentElectricityPriceSensor(SlovenianElectricityCostsSensorBase):
     def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator, config_entry)
-        self._attr_unique_id = f"{config_entry.entry_id}_current_total_price"
-        self._attr_name = "Current Total Electricity Price"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_current_total_price"
+        self._attr_name = "Electricity Current Total Price"
         self._attr_icon = "mdi:currency-eur"
         self._attr_native_unit_of_measurement = f"{CURRENCY_EURO}/kWh"
         self._attr_device_class = SensorDeviceClass.MONETARY
@@ -179,8 +179,8 @@ class CurrentSeasonSensor(SlovenianElectricityCostsSensorBase):
     def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator, config_entry)
-        self._attr_unique_id = f"{config_entry.entry_id}_current_season"
-        self._attr_name = "Current Season"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_current_season"
+        self._attr_name = "Electricity Current Season"
         self._attr_icon = "mdi:calendar-range"
         self._attr_entity_category = EntityCategory.DIAGNOSTIC
 
@@ -216,8 +216,8 @@ class HolidayStatusSensor(SlovenianElectricityCostsSensorBase):
     def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator, config_entry)
-        self._attr_unique_id = f"{config_entry.entry_id}_holiday_status"
-        self._attr_name = "Holiday Status"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_current_holiday_status"
+        self._attr_name = "Electricity Current Holiday Status"
         self._attr_icon = "mdi:calendar-star"
         self._attr_entity_category = EntityCategory.DIAGNOSTIC
 
@@ -250,8 +250,8 @@ class ElectricityCostSensor(SlovenianElectricityCostsSensorBase):
         """Initialize the sensor."""
         super().__init__(coordinator, config_entry)
         self._consumption_sensor = consumption_sensor
-        self._attr_unique_id = f"{config_entry.entry_id}_electricity_cost"
-        self._attr_name = "Electricity Cost"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_total_cost"
+        self._attr_name = "Electricity Total Cost"
         self._attr_icon = "mdi:cash"
         self._attr_native_unit_of_measurement = CURRENCY_EURO
         self._attr_device_class = SensorDeviceClass.MONETARY
@@ -313,8 +313,8 @@ class TariffBlockPriceSensor(SlovenianElectricityCostsSensorBase):
         """Initialize the sensor."""
         super().__init__(coordinator, config_entry)
         self._block = block
-        self._attr_unique_id = f"{config_entry.entry_id}_block_{block}_price"
-        self._attr_name = f"Block {block} Price"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_block_{block}_price"
+        self._attr_name = f"Electricity Block {block} Price"
         self._attr_icon = "mdi:currency-eur"
         self._attr_native_unit_of_measurement = f"{CURRENCY_EURO}/kWh"
         self._attr_device_class = SensorDeviceClass.MONETARY
@@ -347,3 +347,171 @@ class TariffBlockPriceSensor(SlovenianElectricityCostsSensorBase):
             attrs["season_note"] = "Block 5 is only used in higher season (Oct-Mar)"
             
         return attrs
+
+
+class EnergyTariffSensor(SlovenianElectricityCostsSensorBase):
+    """Sensor for current energy tariff (VT/MT)."""
+
+    def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, config_entry)
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_current_energy_tariff"
+        self._attr_name = "Electricity Current Energy Tariff"
+        self._attr_icon = "mdi:lightning-bolt"
+        self._attr_entity_category = EntityCategory.DIAGNOSTIC
+
+    @property
+    def native_value(self) -> str | None:
+        """Return the current energy tariff."""
+        if self.coordinator.data is None:
+            return None
+        return self.coordinator.data.get("energy_tariff", "MT")
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return extra state attributes."""
+        if self.coordinator.data is None:
+            return {}
+        
+        energy_tariff = self.coordinator.data.get("energy_tariff", "MT")
+        return {
+            "tariff_code": energy_tariff,
+            "description": ENERGY_DESCRIPTIONS.get(energy_tariff, "Unknown"),
+            "last_updated": self.coordinator.data.get("last_updated"),
+        }
+
+
+class EnergyPriceSensor(SlovenianElectricityCostsSensorBase):
+    """Sensor for current energy price component."""
+
+    def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, config_entry)
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_current_energy_price"
+        self._attr_name = "Electricity Current Energy Price"
+        self._attr_icon = "mdi:lightning-bolt-circle"
+        self._attr_native_unit_of_measurement = f"{CURRENCY_EURO}/kWh"
+        self._attr_device_class = SensorDeviceClass.MONETARY
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+
+    @property
+    def native_value(self) -> float | None:
+        """Return the current energy price."""
+        if self.coordinator.data is None:
+            return None
+        return round(self.coordinator.data.get("energy_price", 0), 6)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return extra state attributes."""
+        if self.coordinator.data is None:
+            return {}
+        
+        energy_tariff = self.coordinator.data.get("energy_tariff", "MT")
+        return {
+            "energy_tariff": energy_tariff,
+            "tariff_description": ENERGY_DESCRIPTIONS.get(energy_tariff, "Unknown"),
+            "last_updated": self.coordinator.data.get("last_updated"),
+        }
+
+
+class NetworkPriceSensor(SlovenianElectricityCostsSensorBase):
+    """Sensor for current network price component."""
+
+    def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, config_entry)
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_current_network_price"
+        self._attr_name = "Electricity Current Network Price"
+        self._attr_icon = "mdi:transmission-tower"
+        self._attr_native_unit_of_measurement = f"{CURRENCY_EURO}/kWh"
+        self._attr_device_class = SensorDeviceClass.MONETARY
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+
+    @property
+    def native_value(self) -> float | None:
+        """Return the current network price."""
+        if self.coordinator.data is None:
+            return None
+        return round(self.coordinator.data.get("network_price", 0), 6)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return extra state attributes."""
+        if self.coordinator.data is None:
+            return {}
+        
+        current_block = self.coordinator.data.get("current_block")
+        return {
+            "current_block": current_block,
+            "block_description": BLOCK_DESCRIPTIONS.get(current_block, "Unknown"),
+            "last_updated": self.coordinator.data.get("last_updated"),
+        }
+
+
+class ContributionsPriceSensor(SlovenianElectricityCostsSensorBase):
+    """Sensor for contributions price component."""
+
+    def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, config_entry)
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_contributions"
+        self._attr_name = "Electricity Contributions"
+        self._attr_icon = "mdi:hand-heart"
+        self._attr_native_unit_of_measurement = f"{CURRENCY_EURO}/kWh"
+        self._attr_device_class = SensorDeviceClass.MONETARY
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+
+    @property
+    def native_value(self) -> float | None:
+        """Return the contributions price."""
+        if self.coordinator.data is None:
+            return None
+        return round(self.coordinator.data.get("contributions", 0), 6)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return extra state attributes."""
+        if self.coordinator.data is None:
+            return {}
+        
+        return {
+            "description": "Contributions (RES, OVES, etc.)",
+            "last_updated": self.coordinator.data.get("last_updated"),
+        }
+
+
+class ExciseTaxSensor(SlovenianElectricityCostsSensorBase):
+    """Sensor for excise tax component."""
+
+    def __init__(self, coordinator, config_entry: ConfigEntry) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, config_entry)
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_excise_tax"
+        self._attr_name = "Electricity Excise Tax"
+        self._attr_icon = "mdi:receipt"
+        self._attr_native_unit_of_measurement = f"{CURRENCY_EURO}/kWh"
+        self._attr_device_class = SensorDeviceClass.MONETARY
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+
+    @property
+    def native_value(self) -> float | None:
+        """Return the excise tax."""
+        if self.coordinator.data is None:
+            return None
+        return round(self.coordinator.data.get("excise_tax", 0), 6)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return extra state attributes."""
+        if self.coordinator.data is None:
+            return {}
+        
+        return {
+            "description": "Excise tax (Trošarina)",
+            "last_updated": self.coordinator.data.get("last_updated"),
+        }
+
+
+# Alias for NetworkBlockPriceSensor to maintain compatibility
+NetworkBlockPriceSensor = TariffBlockPriceSensor

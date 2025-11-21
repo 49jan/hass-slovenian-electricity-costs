@@ -4,5 +4,7 @@
   "filename": "slovenian_electricity_costs.zip",
   "render_readme": true,
   "zip_release": true,
-  "hide_default_branch": false
+  "hide_default_branch": false,
+  "homeassistant": "2023.4.0",
+  "hacs": "1.31.0"
 }

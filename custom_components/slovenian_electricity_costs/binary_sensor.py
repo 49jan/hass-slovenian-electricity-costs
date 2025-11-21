@@ -49,8 +49,8 @@ class TariffBlockBinarySensor(CoordinatorEntity, BinarySensorEntity):
         super().__init__(coordinator)
         self._config_entry = config_entry
         self._block = block
-        self._attr_unique_id = f"{config_entry.entry_id}_block_{block}_active"
-        self._attr_name = f"Tariff Block {block} Active"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_block_{block}_active"
+        self._attr_name = f"Electricity Block {block} Active"
         self._attr_has_entity_name = True
         
         # Set icon based on block
@@ -119,8 +119,8 @@ class HigherSeasonBinarySensor(CoordinatorEntity, BinarySensorEntity):
         """Initialize the binary sensor."""
         super().__init__(coordinator)
         self._config_entry = config_entry
-        self._attr_unique_id = f"{config_entry.entry_id}_higher_season"
-        self._attr_name = "Higher Season"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_higher_season"
+        self._attr_name = "Electricity Higher Season"
         self._attr_has_entity_name = True
         self._attr_icon = "mdi:snowflake"
 
@@ -169,8 +169,8 @@ class HolidayBinarySensor(CoordinatorEntity, BinarySensorEntity):
         """Initialize the binary sensor."""
         super().__init__(coordinator)
         self._config_entry = config_entry
-        self._attr_unique_id = f"{config_entry.entry_id}_is_holiday"
-        self._attr_name = "Holiday Today"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_holiday_today"
+        self._attr_name = "Electricity Holiday Today"
         self._attr_has_entity_name = True
         self._attr_icon = "mdi:calendar-star"
 
@@ -212,8 +212,8 @@ class CheapElectricityBinarySensor(CoordinatorEntity, BinarySensorEntity):
         """Initialize the binary sensor."""
         super().__init__(coordinator)
         self._config_entry = config_entry
-        self._attr_unique_id = f"{config_entry.entry_id}_cheap_electricity"
-        self._attr_name = "Cheap Electricity"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_cheap_rate"
+        self._attr_name = "Electricity Cheap Rate"
         self._attr_has_entity_name = True
         self._attr_icon = "mdi:currency-eur-off"
 
@@ -261,8 +261,8 @@ class ExpensiveElectricityBinarySensor(CoordinatorEntity, BinarySensorEntity):
         """Initialize the binary sensor."""
         super().__init__(coordinator)
         self._config_entry = config_entry
-        self._attr_unique_id = f"{config_entry.entry_id}_expensive_electricity"
-        self._attr_name = "Expensive Electricity"
+        self._attr_unique_id = f"{config_entry.entry_id}_electricity_expensive_rate"
+        self._attr_name = "Electricity Expensive Rate"
         self._attr_has_entity_name = True
         self._attr_icon = "mdi:currency-eur"
 
