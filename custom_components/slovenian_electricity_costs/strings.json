@@ -1,0 +1,108 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Slovenian Electricity Costs Setup",
+        "description": "Configure your electricity distributor and consumption sensor.",
+        "data": {
+          "distributor": "Electricity Distributor",
+          "consumption_sensor": "Electricity Consumption Sensor (Optional)",
+          "auto_update": "Enable Automatic Price Updates"
+        }
+      },
+      "prices": {
+        "title": "Electricity Prices Configuration",
+        "description": "Configure electricity prices for each tariff block for {distributor}.\n\nTariff Blocks:\n• Block 1: {block_1_desc}\n• Block 2: {block_2_desc}\n• Block 3: {block_3_desc}\n• Block 4: {block_4_desc}\n• Block 5: {block_5_desc}\n\n{season_info}",
+        "data": {
+          "block_1_price": "Block 1 Price (Very Low Rate - Night)",
+          "block_2_price": "Block 2 Price (Low Rate)",
+          "block_3_price": "Block 3 Price (Medium Rate)",
+          "block_4_price": "Block 4 Price (High Rate - Peak)",
+          "block_5_price": "Block 5 Price (Very High Rate - Special Peak)"
+        }
+      }
+    },
+    "error": {
+      "invalid_price": "Price must be greater than 0"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "description": "Update configuration options for Slovenian Electricity Costs.",
+        "data": {
+          "auto_update": "Enable Automatic Price Updates",
+          "block_1_price": "Block 1 Price (Very Low Rate - Night)",
+          "block_2_price": "Block 2 Price (Low Rate)",
+          "block_3_price": "Block 3 Price (Medium Rate)",
+          "block_4_price": "Block 4 Price (High Rate - Peak)",
+          "block_5_price": "Block 5 Price (Very High Rate - Special Peak)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "current_tariff_block": {
+        "name": "Current Tariff Block"
+      },
+      "current_electricity_price": {
+        "name": "Current Electricity Price"
+      },
+      "current_season": {
+        "name": "Current Season"
+      },
+      "holiday_status": {
+        "name": "Holiday Status"
+      },
+      "electricity_cost": {
+        "name": "Electricity Cost"
+      },
+      "block_1_price": {
+        "name": "Block 1 Price"
+      },
+      "block_2_price": {
+        "name": "Block 2 Price"
+      },
+      "block_3_price": {
+        "name": "Block 3 Price"
+      },
+      "block_4_price": {
+        "name": "Block 4 Price"
+      },
+      "block_5_price": {
+        "name": "Block 5 Price"
+      }
+    },
+    "binary_sensor": {
+      "tariff_block_1_active": {
+        "name": "Tariff Block 1 Active"
+      },
+      "tariff_block_2_active": {
+        "name": "Tariff Block 2 Active"
+      },
+      "tariff_block_3_active": {
+        "name": "Tariff Block 3 Active"
+      },
+      "tariff_block_4_active": {
+        "name": "Tariff Block 4 Active"
+      },
+      "tariff_block_5_active": {
+        "name": "Tariff Block 5 Active"
+      },
+      "higher_season": {
+        "name": "Higher Season"
+      },
+      "holiday_today": {
+        "name": "Holiday Today"
+      },
+      "cheap_electricity": {
+        "name": "Cheap Electricity"
+      },
+      "expensive_electricity": {
+        "name": "Expensive Electricity"
+      }
+    }
+  }
+}

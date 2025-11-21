@@ -1,0 +1,14 @@
+{
+  "domain": "slovenian_electricity_costs",
+  "name": "Slovenian Electricity Costs",
+  "codeowners": ["@byJan"],
+  "config_flow": true,
+  "documentation": "https://github.com/byJan/slovenian_electricity_costs",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/byJan/slovenian_electricity_costs/issues",
+  "requirements": ["aiohttp>=3.8.0"],
+  "version": "1.0.0",
+  "after_dependencies": [],
+  "dependencies": []
+}

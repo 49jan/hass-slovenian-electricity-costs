@@ -1,0 +1,78 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Slovenian Electricity Costs Setup",
+        "description": "Configure your electricity supplier and consumption monitoring.",
+        "data": {
+          "supplier": "Electricity Supplier",
+          "consumption_sensor": "Energy Consumption Sensor (optional)",
+          "auto_update": "Auto-update prices monthly"
+        },
+        "data_description": {
+          "supplier": "Choose your electricity supplier for default pricing.",
+          "consumption_sensor": "Select energy sensor to monitor consumption (leave blank for manual tracking).",
+          "auto_update": "Automatically update prices at the start of each month."
+        }
+      },
+      "prices": {
+        "title": "Electricity Pricing Configuration",
+        "description": "Set up your specific electricity prices. These include all components: electrical energy tariffs (VT/MT), network charges (tariff blocks 1-5), contributions, and excise tax. Supplier: {supplier}",
+        "data": {
+          "energy_vt_price": "High Tariff (VT) Energy Price",
+          "energy_mt_price": "Low Tariff (MT) Energy Price",
+          "block_1_price": "Network Charge - Block 1",
+          "block_2_price": "Network Charge - Block 2", 
+          "block_3_price": "Network Charge - Block 3",
+          "block_4_price": "Network Charge - Block 4",
+          "block_5_price": "Network Charge - Block 5",
+          "contributions_price": "Contributions",
+          "excise_tax": "Excise Tax"
+        },
+        "data_description": {
+          "energy_vt_price": "{energy_vt_desc} - Price per kWh for electrical energy during high tariff period",
+          "energy_mt_price": "{energy_mt_desc} - Price per kWh for electrical energy during low tariff period",
+          "block_1_price": "{block_1_desc} - Network distribution charge per kWh",
+          "block_2_price": "{block_2_desc} - Network distribution charge per kWh", 
+          "block_3_price": "{block_3_desc} - Network distribution charge per kWh",
+          "block_4_price": "{block_4_desc} - Network distribution charge per kWh",
+          "block_5_price": "{block_5_desc} - Network distribution charge per kWh",
+          "contributions_price": "Various regulatory contributions per kWh",
+          "excise_tax": "Government excise tax per kWh"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "unknown": "Unexpected error",
+      "invalid_price": "Invalid price value",
+      "missing_sensor": "Selected energy sensor not found"
+    },
+    "abort": {
+      "already_configured": "Integration is already configured",
+      "single_instance_allowed": "Only a single configuration of Slovenian Electricity Costs is allowed."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Slovenian Electricity Costs Options", 
+        "description": "Update your electricity pricing configuration.",
+        "data": {
+          "supplier": "Electricity Supplier",
+          "auto_update": "Auto-update prices monthly",
+          "energy_vt_price": "High Tariff (VT) Energy Price",
+          "energy_mt_price": "Low Tariff (MT) Energy Price", 
+          "block_1_price": "Network Charge - Block 1",
+          "block_2_price": "Network Charge - Block 2",
+          "block_3_price": "Network Charge - Block 3", 
+          "block_4_price": "Network Charge - Block 4",
+          "block_5_price": "Network Charge - Block 5",
+          "contributions_price": "Contributions",
+          "excise_tax": "Excise Tax"
+        }
+      }
+    }
+  }
+}

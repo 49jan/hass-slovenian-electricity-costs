@@ -1,0 +1,8 @@
+{
+  "name": "Slovenian Electricity Costs",
+  "content_in_root": false,
+  "filename": "slovenian_electricity_costs.zip",
+  "render_readme": true,
+  "zip_release": true,
+  "hide_default_branch": false
+}

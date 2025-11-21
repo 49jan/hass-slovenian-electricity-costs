@@ -1,0 +1,88 @@
+# Services for Slovenian Electricity Costs integration
+
+update_prices:
+  name: Update Electricity Prices
+  description: Manually update electricity prices for all tariff blocks
+  fields:
+    block_1_price:
+      name: Block 1 Price
+      description: Price for tariff block 1 (Highest rate - peak hours)
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.000001
+          unit_of_measurement: "€/kWh"
+    block_2_price:
+      name: Block 2 Price
+      description: Price for tariff block 2
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.000001
+          unit_of_measurement: "€/kWh"
+    block_3_price:
+      name: Block 3 Price
+      description: Price for tariff block 3
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.000001
+          unit_of_measurement: "€/kWh"
+    block_4_price:
+      name: Block 4 Price
+      description: Price for tariff block 4
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.000001
+          unit_of_measurement: "€/kWh"
+    block_5_price:
+      name: Block 5 Price
+      description: Price for tariff block 5 (Lowest rate - night/off-peak)
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.000001
+          unit_of_measurement: "€/kWh"
+
+get_current_block:
+  name: Get Current Tariff Block
+  description: Get the current active tariff block information including season and holiday status
+  fields: {}
+
+calculate_cost:
+  name: Calculate Electricity Cost
+  description: Calculate electricity cost for a given consumption and time period
+  fields:
+    consumption_kwh:
+      name: Consumption (kWh)
+      description: Electricity consumption in kilowatt hours
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 10000
+          step: 0.001
+          unit_of_measurement: "kWh"
+    start_time:
+      name: Start Time
+      description: Start time for cost calculation (optional)
+      required: false
+      selector:
+        time:
+    end_time:
+      name: End Time
+      description: End time for cost calculation (optional)
+      required: false
+      selector:
+        time:
