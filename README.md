@@ -1,124 +1,214 @@
 # Slovenian Electricity Costs
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/custom-components/hacs)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/byJan/slovenian_electricity_costs)](https://github.com/byJan/slovenian_electricity_costs/releases)
-[![GitHub](https://img.shields.io/github/license/byJan/slovenian_electricity_costs)](LICENSE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/49jan/hass-slovenian-electricity-costs)](https://github.com/49jan/hass-slovenian-electricity-costs/releases)
+[![GitHub](https://img.shields.io/github/license/49jan/hass-slovenian-electricity-costs)](LICENSE)
 
-Home Assistant integracija za računanje cene elektrike po slovenskem sistemu z **ločenim prispevnim sistemom za energijo in omrežnino ter popolno podporo za sezone in praznike**.
+A comprehensive Home Assistant integration for calculating electricity costs using the **Slovenian tariff system** with separated pricing components (energy + network + contributions + excise tax) and full seasonal/holiday support.
 
-## Ključne Funkcionalnosti ✨
+## Key Features ✨
 
-- **🗓️ Sezonska Tarifikacija**: Popolno upoštevanje višje (november-februar) in nižje (marec-oktober) sezone
-- **🎉 Slovenski Prazniki**: Dinamično računanje vseh slovenskih praznikov vključno z velikonočnimi
-- **⚡ VT/MT Energijske Tarife**: Visoka tarifa (VT) in mala tarifa (MT) za energijo
-- **🔌 Tarifni Bloki 1-5**: Omrežnina (network charges) glede na čas, dan in sezono
-- **💰 Popolna Cenovna Struktura**: Energija + Omrežnina + Prispevki + Trošarina
-- **📊 Energy Dashboard**: Integracija s Home Assistant Energy zavihkom
-- **🤖 Avtomatizacije**: Binarne senzorje za enostavno avtomatizacijo naprav
-- **📈 Sledenje Stroškov**: Realno računanje stroškov na podlagi porabe
+- **🗓️ Seasonal Tariffs**: Complete support for higher (November-February) and lower (March-October) seasons
+- **🎉 Slovenian Holidays**: Dynamic calculation of all Slovenian holidays including Easter-based dates
+- **⚡ VT/MT Energy Tariffs**: High tariff (VT) and low tariff (MT) for electrical energy
+- **🔌 Network Tariff Blocks 1-5**: Network charges (omrežnina) based on time, day, and season
+- **💰 Complete Price Structure**: Energy + Network + Contributions + Excise Tax
+- **📊 Energy Dashboard**: Integration with Home Assistant Energy tab
+- **🤖 Automation Support**: Binary sensors for easy device automation
+- **📈 Cost Tracking**: Real-time cost calculation based on consumption
+- **🎯 6-Decimal Precision**: Accurate pricing to 0.000001 EUR/kWh
 
-## Slovenska Cenovna Struktura Elektrike 💰
+## Slovenian Electricity Price Structure 💰
 
-**Skupna cena elektrike se sestavlja iz 4 komponent:**
+**Total electricity price consists of 4 components:**
 
-1. **Električna Energija** (VT/MT tariifi)
-   - VT (Visoka Tarifa): delava dni 06:00-22:00
-   - MT (Mala Tarifa): ostali čas, vikendi, prazniki
+1. **Electrical Energy** (VT/MT tariffs)
+   - VT (High Tariff): Working days 06:00-22:00
+   - MT (Low Tariff): Off-peak hours, weekends, holidays
 
-2. **Omrežnina** (Tarifni Bloki 1-5) 
-   - Stroški distribucije električnega omrežja
-   - Odvisni od časa, dneva in sezone
+2. **Network Charges** (Tariff Blocks 1-5) 
+   - Distribution network costs (omrežnina)
+   - Based on time, day, and season
 
-3. **Prispevki** 
-   - Regulativni prispevki (AGEN-RS, OVE, itd.)
+3. **Contributions** 
+   - Regulatory contributions (RES, OVES, etc.)
 
-4. **Trošarina**
-   - Državna trošarina na električno energijo
+4. **Excise Tax**
+   - Government excise tax on electricity
 
-## Tarifni Sistem za Omrežnino 🕐
+## Network Tariff Block System 🕐
 
-### Višja Sezona (November - Februar)
-**Delovni dnevi (pon-pet):**
-- `00:00-06:00`: **Blok 1** (Zelo poceni nočni)
-- `06:00-10:00`: **Blok 5** ⚠️ (Najvišji vrh - zimska konica)
-- `10:00-14:00`: **Blok 3** (Srednji)
-- `14:00-16:00`: **Blok 4** (Visok vrh)
-- `16:00-20:00`: **Blok 5** ⚠️ (Najvišji vrh - večerna konica)
-- `20:00-22:00`: **Blok 4** (Visok)
-- `22:00-24:00`: **Blok 2** (Nizek nočni)
+### Higher Season (November - February)
+**Working days (Monday-Friday):**
+- `00:00-06:00`: **Block 3**
+- `06:00-07:00`: **Block 2**
+- `07:00-14:00`: **Block 1**
+- `14:00-16:00`: **Block 2**
+- `16:00-20:00`: **Block 1**
+- `20:00-22:00`: **Block 2**
+- `22:00-24:00`: **Block 3**
 
-### Nižja Sezona (Marec - Oktober)  
-**Delovni dnevi (pon-pet):**
-- `00:00-06:00`: **Blok 1** (Zelo poceni nočni)
-- `06:00-10:00`: **Blok 4** (Jutranji vrh)
-- `10:00-14:00`: **Blok 3** (Srednji)
-- `14:00-16:00`: **Blok 4** (Popoldanski vrh)
-- `16:00-20:00`: **Blok 3** (Večerni)
-- `20:00-22:00`: **Blok 3** (Večerni)
-- `22:00-24:00`: **Blok 2** (Nočni)
+**Weekends & Holidays:**
+- `00:00-06:00`: **Block 4**
+- `06:00-07:00`: **Block 3**
+- `07:00-14:00`: **Block 2**
+- `14:00-16:00`: **Block 3**
+- `16:00-20:00`: **Block 2**
+- `20:00-22:00`: **Block 3**
+- `22:00-24:00`: **Block 4**
 
-> **Pomembno**: Blok 5 se uporablja **samo v višji sezoni** med koničnimi urami!
+### Lower Season (March - October)
+**Working days (Monday-Friday):**
+- `00:00-06:00`: **Block 4**
+- `06:00-07:00`: **Block 3**
+- `07:00-14:00`: **Block 2**
+- `14:00-16:00`: **Block 3**
+- `16:00-20:00`: **Block 2**
+- `20:00-22:00`: **Block 3**
+- `22:00-24:00`: **Block 4**
 
-### Vikendi in Prazniki
-- **Sobote**: Blok 1-3 (odvisno od sezone)
-- **Nedelje in prazniki**: Pretežno blok 1-2
+**Weekends & Holidays:**
+- `00:00-06:00`: **Block 5**
+- `06:00-07:00`: **Block 4**
+- `07:00-14:00`: **Block 3**
+- `14:00-16:00`: **Block 4**
+- `16:00-20:00`: **Block 3**
+- `20:00-22:00`: **Block 4**
+- `22:00-24:00`: **Block 5**
 
-## Namestitev 📦
+## Price Hierarchy
 
-### Preko HACS (priporočeno)
-1. Dodajte ta repozitorij v HACS kot custom repository
-2. Poiščite "Slovenian Electricity Costs" v HACS
-3. Namestite integracijo
-4. Ponovno zaženite Home Assistant
+- **Block 1**: 0.01998 EUR/kWh
+- **Block 2**: 0.01833 EUR/kWh
+- **Block 3**: 0.01809 EUR/kWh
+- **Block 4**: 0.01855 EUR/kWh
+- **Block 5**: 0.01873 EUR/kWh
+---
 
-### Ročno
-1. Prenesite datoteke v `custom_components/slovenian_electricity_costs/`
-2. Ponovno zaženite Home Assistant
-3. Dodajte integracijo preko UI
+## Installation 📦
 
-## Konfiguracija ⚙️
+### Via HACS (Recommended)
+1. Add this repository as a custom repository in HACS
+2. Search for "Slovenian Electricity Costs" in HACS
+3. Install the integration
+4. Restart Home Assistant
 
+### Manual Installation
+1. Download the `custom_components/slovenian_electricity_costs/` folder
+2. Copy it to your Home Assistant `custom_components` directory
+3. Restart Home Assistant
+4. Add the integration via UI
+
+---
+
+## Configuration ⚙️
+
+### Initial Setup:
 1. **Settings** → **Devices & Services** → **Add Integration**
-2. Poiščite **"Slovenian Electricity Costs"**
-3. Izberite dobavitelja elektrike (GEN-I, Elektro Energija, itd.)
-4. Opcijsko izberite senzor porabe elektrike
-5. Vnesite cene za **vse komponente** (€/kWh):
-   - **Energijske tarife**: VT in MT cene
-   - **Omrežnina**: Tarifi bloki 1-5
-   - **Prispevki**: Regulativni prispevki
-   - **Trošarina**: Državna trošarina
+2. Search for **"Slovenian Electricity Costs"**
+3. **Select your electricity supplier** (GEN-I, Petrol, Elektro Energija, etc.)
+4. **Optional** - Select energy consumption sensor for monitoring
+5. **Enter SEPARATE prices** (EUR/kWh):
 
-> **Pomembno**: Vnesti morate ločene cene za vse komponente! Tarifni bloki so le del omrežnine, ne celotne cene elektrike.
+   **ENERGY TARIFFS:**
+   - **VT Price**: 0.1199 EUR (high tariff, working hours)
+   - **MT Price**: 0.0979 EUR (low tariff, off-peak)
 
-## Senzorji 📊
+   **NETWORK CHARGES (tariff blocks):**
+   - **Block 1**: 0.01998 EUR/kWh
+   - **Block 2**: 0.01833 EUR/kWh
+   - **Block 3**: 0.01809 EUR/kWh
+   - **Block 4**: 0.01855 EUR/kWh
+   - **Block 5**: 0.01873 EUR/kWh
 
-### Glavni Senzorji
-- `sensor.current_tariff_block` - Trenutni tarifni blok za omrežnino (1-5)
-- `sensor.current_energy_tariff` - Trenutna energijska tarifa (VT/MT)
-- `sensor.current_electricity_price` - Skupna trenutna cena elektrike (€/kWh)
-- `sensor.current_season` - Trenutna sezona (Višja/Nižja)
-- `sensor.holiday_status` - Status praznika (Holiday/Working Day)
-- `sensor.electricity_cost` - Izračunan strošek elektrike (€)
+   **ADDITIONAL COSTS:**
+   - **Contributions**: 0.000930 EUR (RES, OVES, etc.)
+   - **Excise Tax**: 0.001530 EUR (government tax)
 
-### Cene Po Komponentah
-- `sensor.energy_vt_price` in `sensor.energy_mt_price` - Energijske tarife
-- `sensor.block_1_price` do `sensor.block_5_price` - Omrežnina po tarifnih blokih
-- `sensor.contributions_price` - Prispevki
-- `sensor.excise_tax` - Trošarina
+> **Important**: You must enter SEPARATE prices for all components! Tariff blocks are only network charges, not total electricity price.
 
-### Binarski Senzorji za Avtomatizacije 🤖
-- `binary_sensor.tariff_block_1_active` do `binary_sensor.tariff_block_5_active`
-- `binary_sensor.higher_season` - Ali je višja sezona
-- `binary_sensor.holiday_today` - Ali je danes praznik
-- `binary_sensor.cheap_electricity` - Poceni elektriko (bloki 1-2)
-- `binary_sensor.expensive_electricity` - Draga elektriko (bloki 4-5)
+---
 
-## Primeri Avtomatizacij 🏠
+## Sensors & Entities 📊
 
-### Bojler med Poceni Elektriko
+### Main Sensors:
+```yaml
+sensor.current_tariff_block              # Current network tariff block (1-5)
+sensor.current_energy_tariff             # Current energy tariff (VT/MT)
+sensor.current_total_electricity_price   # Total current price (all components)
+sensor.current_season                    # Current season (higher/lower)
+sensor.holiday_status                   # Holiday status (Holiday/Working Day)
+sensor.electricity_cost                # Calculated electricity cost (EUR)
+```
+
+### Price Components:
+```yaml
+sensor.energy_vt_price                  # VT energy price
+sensor.energy_mt_price                  # MT energy price
+sensor.block_1_price                   # Network charge block 1
+sensor.block_2_price                   # Network charge block 2
+sensor.block_3_price                   # Network charge block 3
+sensor.block_4_price                   # Network charge block 4
+sensor.block_5_price                   # Network charge block 5
+sensor.contributions_price             # Contributions
+sensor.excise_tax                     # Excise tax
+```
+
+### Binary Sensors for Automations:
+```yaml
+binary_sensor.tariff_block_1_active    # Is block 1 active
+binary_sensor.tariff_block_2_active    # Is block 2 active
+binary_sensor.tariff_block_3_active    # Is block 3 active
+binary_sensor.tariff_block_4_active    # Is block 4 active
+binary_sensor.tariff_block_5_active    # Is block 5 active
+
+binary_sensor.higher_season            # Is higher season active
+binary_sensor.holiday_today            # Is today a holiday
+binary_sensor.cheap_electricity        # Cheap rates (blocks 4-5)
+binary_sensor.expensive_electricity    # Expensive rates (blocks 1-2)
+```
+
+---
+
+## Services 🛠️
+
+### 1. Manual Price Updates:
+```yaml
+service: slovenian_electricity_costs.update_prices
+data:
+  energy_vt_price: 0.1199
+  energy_mt_price: 0.0979
+  block_1_price: 0.01998
+  block_2_price: 0.01833
+  block_3_price: 0.01809
+  block_4_price: 0.01855
+  block_5_price: 0.01873
+  contributions_price: 0.000930
+  excise_tax: 0.001530
+```
+
+### 2. Get Current Status:
+```yaml
+service: slovenian_electricity_costs.get_current_block
+# Fires event with detailed current status
+```
+
+### 3. Calculate Cost:
+```yaml
+service: slovenian_electricity_costs.calculate_cost
+data:
+  consumption_kwh: 15.5
+# Fires event with calculated cost
+```
+
+---
+
+## Automation Examples 🏠
+
+### 1. Turn On Water Heater During Cheap Rates:
 ```yaml
 automation:
-  - alias: "Vklopi bojler med poceni elektr"
+  - alias: "Water Heater ON - Cheap Electricity"
     trigger:
       - platform: state
         entity_id: binary_sensor.cheap_electricity
@@ -128,18 +218,14 @@ automation:
         entity_id: switch.water_heater
 ```
 
-### Izklopi Naprave v Višji Sezoni - Blok 5
+### 2. Turn Off Appliances During Most Expensive Rate:
 ```yaml
 automation:
-  - alias: "Izklopi porabnike v bloku 5"
+  - alias: "Appliances OFF - Block 1 Most Expensive"
     trigger:
       - platform: state
-        entity_id: binary_sensor.tariff_block_5_active
+        entity_id: binary_sensor.tariff_block_1_active
         to: "on"
-    condition:
-      - condition: state
-        entity_id: binary_sensor.higher_season
-        state: "on"
     action:
       - service: switch.turn_off
         target:
@@ -148,14 +234,14 @@ automation:
             - switch.dishwasher
       - service: notify.mobile_app
         data:
-          title: "⚠️ Najvišja tarifa!"
-          message: "Aktiven blok 5 ({{ states('sensor.current_electricity_price') }}€/kWh) - porabniki izklopljeni"
+          title: "⚠️ Most Expensive Rate!"
+          message: "Block 1 active ({{states('sensor.current_total_electricity_price')}}€/kWh)"
 ```
 
-### Obvestilo o Praznikih
+### 3. Holiday Rate Notification:
 ```yaml
 automation:
-  - alias: "Obvestilo praznična tarifa"
+  - alias: "Holiday Rate Notification"
     trigger:
       - platform: state
         entity_id: binary_sensor.holiday_today
@@ -163,62 +249,59 @@ automation:
     action:
       - service: notify.mobile_app
         data:
-          title: "🎉 Danes je praznik"
-          message: "Velja praznična tarifa - idealen čas za pranje in pomivanje!"
+          title: "🎉 Holiday Today!"
+          message: "Holiday rates apply - great time for energy-intensive activities!"
 ```
 
-## Servisi 🛠️
+---
 
-### `slovenian_electricity_costs.update_prices`
-Ročno posodabljanje cen za vse tarifne bloke
+## Supported Slovenian Holidays 🇸🇮
 
-### `slovenian_electricity_costs.get_current_block`  
-Pridobi podrobne informacije o trenutnem stanju (blok, sezona, praznik)
+### Fixed Holidays:
+- New Year's Day (1st, 2nd January)
+- Prešeren Day (8th February)
+- Day of Uprising Against Occupation (27th April)
+- Labour Day (1st, 2nd May)
+- Statehood Day (25th June)
+- Assumption Day (15th August)
+- Reformation Day (31st October)
+- Remembrance Day (1st November)
+- Christmas Day (25th December)
+- Independence and Unity Day (26th December)
 
-### `slovenian_electricity_costs.calculate_cost`
-Izračuna strošek elektrike za podano porabo
+### Dynamic Holidays (calculated):
+- Easter Monday
+- Whit Monday (49 days after Easter)
 
-## Podprti Slovenski Prazniki 🇸🇮
+---
 
-**Fiksni prazniki:**
-- Nova leto (1., 2. januar)
-- Prešernov dan (8. februar)
-- Dan upora (27. april) 
-- Praznik dela (1., 2. maj)
-- Dan državnosti (25. junij)
-- Marijino vnebovzetje (15. avgust)
-- Dan reformacije (31. oktober)
-- Dan spomina (1. november)
-- Božič (25. december)
-- Dan neodvisnosti (26. december)
+## Energy Dashboard Integration 📈
 
-**Dinamični prazniki (računani):**
-- Velikonočni ponedeljek
-- Binkošti
+The integration automatically adds the `sensor.electricity_cost` to Home Assistant Energy Dashboard for:
+- Daily cost tracking
+- Monthly consumption analysis
+- Annual comparisons
+- Consumption optimization based on tariffs
 
-## Energijski Pregled 📈
+---
 
-Integracija avtomatsko dodeli senzor `sensor.electricity_cost` v Home Assistant Energy Dashboard za:
-- Dnevno sledenje stroškov
-- Mesečne analize porabe  
-- Letne primerjave
-- Optimizacija porabe glede na tarife
+## Contributing & Support 🤝
 
-## Prispevki in Podpora 🤝
+If you have suggestions, find bugs, or need help:
+1. Create an **Issue** on GitHub
+2. Suggest improvements via **Pull Request**
+3. Help improve documentation
 
-Če imate predloge, najdete napako ali potrebujete pomoč:
-1. Ustvarite **Issue** na GitHubu
-2. Predlagajte izboljšave preko **Pull Request**
-3. Pomagajte izboljšati dokumentacijo
+---
 
-## Licenca 📄
+## License 📄
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Avtor**: byJan  
-**Verzija**: 1.0.0  
-**Poslednja posodobitev**: November 2025
+**Author**: 49Jan  
+**Version**: 1.0.0  
+**Last Updated**: November 2025
 
-*Ta integracija ni uradno povezana z nobenimi slovenskimi dobavitelji elektrike. Vse cene je potrebno vnesti ročno ali posodobiti glede na aktualne tarife vašega dobavitelja. Ne pozabite, da se skupna cena elektrike sestavi iz več komponent: energija (VT/MT) + omrežnina (bloki 1-5) + prispevki + trošarina.*
+*This integration is not officially associated with any Slovenian electricity distributors. All prices must be entered manually or updated according to current tariffs from your supplier. Remember that total electricity price consists of multiple components: energy (VT/MT) + network (blocks 1-5) + contributions + excise tax.*
