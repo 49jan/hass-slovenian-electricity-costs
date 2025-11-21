@@ -3,22 +3,22 @@
     "step": {
       "user": {
         "title": "Slovenian Electricity Costs Setup",
-        "description": "Configure your electricity distributor and consumption sensor.",
+        "description": "Configure your electricity supplier and consumption sensor.",
         "data": {
-          "distributor": "Electricity Distributor",
+          "supplier": "Electricity Supplier",
           "consumption_sensor": "Electricity Consumption Sensor (Optional)",
           "auto_update": "Enable Automatic Price Updates"
         }
       },
       "prices": {
         "title": "Electricity Prices Configuration",
-        "description": "Configure electricity prices for each tariff block for {distributor}.\n\nTariff Blocks:\n• Block 1: {block_1_desc}\n• Block 2: {block_2_desc}\n• Block 3: {block_3_desc}\n• Block 4: {block_4_desc}\n• Block 5: {block_5_desc}\n\n{season_info}",
+        "description": "Configure electricity prices for each tariff block for {supplier}.\n\nTariff Blocks:\n• Block 1: {block_1_desc}\n• Block 2: {block_2_desc}\n• Block 3: {block_3_desc}\n• Block 4: {block_4_desc}\n• Block 5: {block_5_desc}\n\n{season_info}",
         "data": {
-          "block_1_price": "Block 1 Price (Very Low Rate - Night)",
-          "block_2_price": "Block 2 Price (Low Rate)",
-          "block_3_price": "Block 3 Price (Medium Rate)",
-          "block_4_price": "Block 4 Price (High Rate - Peak)",
-          "block_5_price": "Block 5 Price (Very High Rate - Special Peak)"
+          "block_1_price": "Block 1 Price",
+          "block_2_price": "Block 2 Price",
+          "block_3_price": "Block 3 Price",
+          "block_4_price": "Block 4 Price",
+          "block_5_price": "Block 5 Price"
         }
       }
     },
@@ -33,11 +33,11 @@
         "description": "Update configuration options for Slovenian Electricity Costs.",
         "data": {
           "auto_update": "Enable Automatic Price Updates",
-          "block_1_price": "Block 1 Price (Very Low Rate - Night)",
-          "block_2_price": "Block 2 Price (Low Rate)",
-          "block_3_price": "Block 3 Price (Medium Rate)",
-          "block_4_price": "Block 4 Price (High Rate - Peak)",
-          "block_5_price": "Block 5 Price (Very High Rate - Special Peak)"
+          "block_1_price": "Block 1 Price",
+          "block_2_price": "Block 2 Price",
+          "block_3_price": "Block 3 Price",
+          "block_4_price": "Block 4 Price",
+          "block_5_price": "Block 5 Price"
         }
       }
     }

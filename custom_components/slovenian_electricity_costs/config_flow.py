@@ -7,8 +7,6 @@ from typing import Any
 import voluptuous as vol
 
 from homeassistant import config_entries
-from homeassistant.const import CONF_NAME
-from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers import selector
 from homeassistant.helpers.entity_registry import async_get as async_get_entity_registry
@@ -137,7 +135,6 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 # Create unique entry ID based on supplier
                 unique_id = f"{DOMAIN}_{self._supplier}"
                 await self.async_set_unique_id(unique_id)
-                self._abort_if_unique_id_configured()
 
                 return self.async_create_entry(
                     title=f"Slovenian Electricity Costs - {SUPPLIERS[self._supplier]}",
