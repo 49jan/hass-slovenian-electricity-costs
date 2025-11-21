@@ -76,13 +76,6 @@ A comprehensive Home Assistant integration for calculating electricity costs usi
 - `20:00-22:00`: **Block 4**
 - `22:00-24:00`: **Block 5**
 
-## Price Hierarchy
-
-- **Block 1**: 0.01998 EUR/kWh
-- **Block 2**: 0.01833 EUR/kWh
-- **Block 3**: 0.01809 EUR/kWh
-- **Block 4**: 0.01855 EUR/kWh
-- **Block 5**: 0.01873 EUR/kWh
 ---
 
 ## Installation 📦
@@ -111,19 +104,19 @@ A comprehensive Home Assistant integration for calculating electricity costs usi
 5. **Enter SEPARATE prices** (EUR/kWh):
 
    **ENERGY TARIFFS:**
-   - **VT Price**: 0.1199 EUR (high tariff, working hours)
-   - **MT Price**: 0.0979 EUR (low tariff, off-peak)
+   - **VT Price**: ~0.1199 EUR (high tariff, working hours)
+   - **MT Price**: ~0.0979 EUR (low tariff, off-peak)
 
    **NETWORK CHARGES (tariff blocks):**
-   - **Block 1**: 0.01998 EUR/kWh
-   - **Block 2**: 0.01833 EUR/kWh
-   - **Block 3**: 0.01809 EUR/kWh
-   - **Block 4**: 0.01855 EUR/kWh
-   - **Block 5**: 0.01873 EUR/kWh
+   - **Block 1**: ~0.01998 EUR/kWh
+   - **Block 2**: ~0.01833 EUR/kWh
+   - **Block 3**: ~0.01809 EUR/kWh
+   - **Block 4**: ~0.01855 EUR/kWh
+   - **Block 5**: ~0.01873 EUR/kWh
 
    **ADDITIONAL COSTS:**
-   - **Contributions**: 0.000930 EUR (RES, OVES, etc.)
-   - **Excise Tax**: 0.001530 EUR (government tax)
+   - **Contributions**: ~0.000930 EUR (RES, OVES, etc.)
+   - **Excise Tax**: ~0.001530 EUR (government tax)
 
 > **Important**: You must enter SEPARATE prices for all components! Tariff blocks are only network charges, not total electricity price.
 
