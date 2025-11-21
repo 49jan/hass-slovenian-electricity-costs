@@ -71,9 +71,9 @@ class TariffBlockBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "49Jan",
+            "manufacturer": "49jan",
             "model": "Tariff Calculator",
-            "sw_version": "1.0.0",
+            "sw_version": "1.1-b",
         }
 
     @property
@@ -130,9 +130,9 @@ class HigherSeasonBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "49Jan",
+            "manufacturer": "49jan",
             "model": "Tariff Calculator",
-            "sw_version": "1.0.0",
+            "sw_version": "1.1-b",
         }
 
     @property
@@ -180,9 +180,9 @@ class HolidayBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "49Jan",
+            "manufacturer": "49jan",
             "model": "Tariff Calculator",
-            "sw_version": "1.0.0",
+            "sw_version": "1.1-b",
         }
 
     @property
@@ -223,9 +223,9 @@ class CheapElectricityBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "49Jan",
+            "manufacturer": "49jan",
             "model": "Tariff Calculator",
-            "sw_version": "1.0.0",
+            "sw_version": "1.1-b",
         }
 
     @property
@@ -272,9 +272,9 @@ class ExpensiveElectricityBinarySensor(CoordinatorEntity, BinarySensorEntity):
         return {
             "identifiers": {(DOMAIN, self._config_entry.entry_id)},
             "name": "Slovenian Electricity Costs",
-            "manufacturer": "49Jan",
+            "manufacturer": "49jan",
             "model": "Tariff Calculator",
-            "sw_version": "1.0.0",
+            "sw_version": "1.1-b",
         }
 
     @property

@@ -8,7 +8,7 @@
   "iot_class": "calculated",
   "issue_tracker": "https://github.com/49jan/hass-slovenian-electricity-costs/issues",
   "requirements": ["aiohttp>=3.8.0"],
-  "version": "1.0-b",
+  "version": "1.1-b",
   "after_dependencies": [],
   "dependencies": []
 }

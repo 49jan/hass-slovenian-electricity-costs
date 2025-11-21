@@ -293,8 +293,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Author**: 49Jan  
-**Version**: 1.0.0  
+**Author**: 49jan  
+**Version**: 1.1-b  
 **Last Updated**: November 2025
 
 *This integration is not officially associated with any Slovenian electricity distributors. All prices must be entered manually or updated according to current tariffs from your supplier. Remember that total electricity price consists of multiple components: energy (VT/MT) + network (blocks 1-5) + contributions + excise tax.*
